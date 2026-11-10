@@ -178,3 +178,22 @@
   .kk-promo__in{justify-content:center;padding:8px 12px}
   .kk-promo__r{display:none}
 }
+
+/* ===== 5) Benefity (Doprava zdarma, Poradíme…) ===== */
+.benefitBanner.position--benefitHomepage{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:8px 0 32px!important;padding:0!important;background:none!important;border:0!important}
+.benefitBanner.position--benefitHomepage .benefitBanner__item{display:flex!important;flex-direction:row!important;align-items:flex-start;gap:14px;width:auto!important;max-width:none!important;flex:none!important;margin:0!important;padding:22px 20px!important;background:#fff;border:1px solid #f0e4e8;border-radius:16px;box-shadow:0 2px 10px rgba(74,59,51,.04);text-align:left!important;box-sizing:border-box}
+.benefitBanner.position--benefitHomepage .benefitBanner__item::before,
+.benefitBanner.position--benefitHomepage .benefitBanner__item::after{display:none!important}
+.benefitBanner.position--benefitHomepage .benefitBanner__picture{flex:0 0 46px!important;width:46px!important;height:46px!important;max-width:46px!important;margin:0!important;padding:0!important;display:flex;align-items:center;justify-content:center;background:#f0dde3;border-radius:12px;overflow:hidden}
+.benefitBanner.position--benefitHomepage .benefitBanner__img{width:28px!important;height:28px!important;max-width:28px!important;object-fit:contain;mix-blend-mode:multiply;margin:0!important}
+.benefitBanner.position--benefitHomepage .benefitBanner__content{flex:1 1 auto;min-width:0;padding:0!important;margin:0!important;text-align:left!important}
+.benefitBanner.position--benefitHomepage .benefitBanner__title{display:block;margin:0 0 4px!important;font-size:16px!important;line-height:1.3!important;font-weight:800!important;color:#4a3b33!important;text-transform:none!important;letter-spacing:0!important}
+.benefitBanner.position--benefitHomepage .benefitBanner__data{display:block!important;margin:0!important;font-size:13.5px!important;line-height:1.45!important;color:#8a6f63!important}
+@media(max-width:991px){
+  .benefitBanner.position--benefitHomepage{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+}
+@media(max-width:575px){
+  .benefitBanner.position--benefitHomepage{grid-template-columns:1fr;gap:10px}
+  .benefitBanner.position--benefitHomepage .benefitBanner__item{padding:16px!important;gap:12px}
+  .benefitBanner.position--benefitHomepage .benefitBanner__title{font-size:15px!important}
+}
