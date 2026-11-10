@@ -3,6 +3,9 @@
    ========================================================== */
 (function () {
 
+  // adresa tohoto skriptu – podle ní se načte pruvodce.js ze stejného místa (vč. verze/?v=)
+  var SELF_SRC = (document.currentScript && document.currentScript.src) || 'https://cdn.jsdelivr.net/gh/zebrak-debug/kulkid-assets@main/kulkid.js';
+
   /* ===================== NASTAVENÍ ===================== */
 
   // 1) Vyberte podle věku – odkazy
@@ -25,15 +28,17 @@
 
   // 4) Průvodce výběrem
   var GUIDE_IMG = '/user/documents/upload/pr%C5%AFvodce.png'; // průvodce.png ve správci souborů
-  function guideResultUrl(a) {
-    // a.pro, a.vek, a.cil, a.cena – zde později doplnit logiku doporučení
-    return '/connetix/';
+  var GUIDE_PAGE = '/pruvodce-vyberem/'; // stránka s <div id="kk-guide"></div> – výsledky počítá pruvodce.js
+  function guideResultUrl(v) {
+    // v = kódy odpovědí { kdo, vek, typ, rozp, prio }
+    return GUIDE_PAGE + '?' + Object.keys(v).map(function (k) { return k + '=' + encodeURIComponent(v[k]); }).join('&');
   }
   var GUIDE_Q = [
-    { k: 'pro',  t: 'Pro koho vybíráte?',   s: 'Pro koho vybíráte',   o: ['Pro kluka', 'Pro holku', 'Pro všechny – bez preference'] },
-    { k: 'vek',  t: 'Kolik je dítěti let?', s: 'Kolik je dítěti let', o: ['2–5 let', '6–12 let'] },
-    { k: 'cil',  t: 'Co hledáte?',          s: 'Co hledáte',          o: ['První stavebnici', 'Rozšíření stavebnice', 'Doplněk ke stavebnici'] },
-    { k: 'cena', t: 'Jaký máte rozpočet?',  s: 'Váš rozpočet',        o: ['Do 1 500 Kč', '1 500–3 000 Kč', 'Nad 3 000 Kč', 'Bez omezení'] }
+    { k: 'kdo',  t: 'Pro koho vybíráte?',   s: 'Pro koho vybíráte',   o: ['Pro kluka', 'Pro holku', 'Pro všechny – bez preference'], v: ['kluk', 'holka', 'vse'] },
+    { k: 'vek',  t: 'Kolik je dítěti let?', s: 'Kolik je dítěti let', o: ['2–5 let', '6–12 let'], v: ['mlad', 'star'] },
+    { k: 'typ',  t: 'Co hledáte?',          s: 'Co hledáte',          o: ['První stavebnici', 'Rozšíření stavebnice', 'Doplněk ke stavebnici'], v: ['prvni', 'rozsireni', 'doplnek'] },
+    { k: 'rozp', t: 'Jaký máte rozpočet?',  s: 'Váš rozpočet',        o: ['Do 1 500 Kč', '1 500–3 000 Kč', 'Nad 3 000 Kč', 'Bez omezení'], v: ['r1', 'r2', 'r3', 'r0'] },
+    { k: 'prio', t: 'Co je pro vás při výběru nejdůležitější?', s: 'Co je pro vás nejdůležitější', o: ['Co nejsilnější magnety', 'Příznivá cena', 'Nemám preferenci'], v: ['magnety', 'cena', 'vse'] }
   ];
 
   // 5) Hlavička
@@ -92,7 +97,7 @@
   /* ===================== 4) PRŮVODCE VÝBĚREM ===================== */
   function guide() {
     if (document.querySelector('.kk-guide')) return;
-    var Q = GUIDE_Q, ans = {}, step = 0;
+    var Q = GUIDE_Q, ans = {}, val = {}, step = 0;
 
     var sec = document.createElement('div');
     sec.className = 'kk-guide';
@@ -104,15 +109,15 @@
       var li = Q.map(function (q, i) { return '<li><span>' + (i + 1) + '</span>' + q.s + '</li>'; }).join('');
       panel.innerHTML =
         '<h2>Nevíte, kterou sadu koupit jako první?</h2>' +
-        '<p class="kk-guide__lead">Odpovězte na 4 krátké otázky a doporučíme vám konkrétní sadu – i to, čím ji později rozšířit.</p>' +
+        '<p class="kk-guide__lead">Odpovězte na ' + Q.length + ' krátkých otázek a doporučíme vám konkrétní sadu – i to, čím ji později rozšířit.</p>' +
         '<ol class="kk-guide__steps">' + li + '</ol>' +
         '<div class="kk-guide__btns"><button type="button" class="kk-btn kk-btn--pri" data-go>Otevřít průvodce</button></div>';
-      panel.querySelector('[data-go]').onclick = function () { step = 0; ans = {}; question(); };
+      panel.querySelector('[data-go]').onclick = function () { step = 0; ans = {}; val = {}; question(); };
     }
     function question() {
       var q = Q[step];
-      var opts = q.o.map(function (o) {
-        return '<button type="button"' + (ans[q.k] === o ? ' class="is-sel"' : '') + '>' + o + '</button>';
+      var opts = q.o.map(function (o, i) {
+        return '<button type="button" data-i="' + i + '"' + (ans[q.k] === o ? ' class="is-sel"' : '') + '>' + o + '</button>';
       }).join('');
       panel.innerHTML =
         '<div class="kk-guide__meta">Otázka ' + (step + 1) + ' ze ' + Q.length +
@@ -122,6 +127,7 @@
       [].forEach.call(panel.querySelectorAll('.kk-guide__opts button'), function (b) {
         b.onclick = function () {
           ans[q.k] = b.textContent;
+          val[q.k] = q.v[+b.getAttribute('data-i')];
           step++;
           if (step < Q.length) question(); else result();
         };
@@ -131,15 +137,15 @@
       };
     }
     function result() {
-      window.kkGuideAnswers = ans;
+      window.kkGuideAnswers = val;
       var sum = Q.map(function (q) { return '<span>' + ans[q.k] + '</span>'; }).join('');
       panel.innerHTML =
         '<div class="kk-guide__meta">Hotovo<span class="kk-guide__bar"><i style="width:100%"></i></span></div>' +
         '<h3>Díky! Podle vašich odpovědí vám ukážeme vhodné sady.</h3>' +
         '<div class="kk-guide__sum">' + sum + '</div>' +
-        '<div class="kk-guide__btns"><a class="kk-btn kk-btn--pri" href="' + guideResultUrl(ans) + '">Zobrazit doporučené sady</a>' +
+        '<div class="kk-guide__btns"><a class="kk-btn kk-btn--pri" href="' + guideResultUrl(val) + '">Zobrazit doporučené sady</a>' +
         '<button type="button" class="kk-btn kk-btn--sec" data-reset>Začít znovu</button></div>';
-      panel.querySelector('[data-reset]').onclick = function () { step = 0; ans = {}; question(); };
+      panel.querySelector('[data-reset]').onclick = function () { step = 0; ans = {}; val = {}; question(); };
     }
     intro();
 
@@ -150,6 +156,16 @@
       sec.classList.add('container');
       (document.getElementById('content') || document.querySelector('.content-wrapper') || document.body).appendChild(sec);
     }
+  }
+
+  /* ===================== 4b) PRŮVODCE – STRÁNKA ===================== */
+  // na stránce s <div id="kk-guide"></div> dotáhne pruvodce.js (data 151 produktů se tak nenačítají jinde)
+  function guidePage() {
+    if (!document.getElementById('kk-guide') || window.kkGuidePageLoaded) return;
+    window.kkGuidePageLoaded = true;
+    var s = document.createElement('script');
+    s.src = SELF_SRC.replace(/kulkid(\.min)?\.js/, 'pruvodce.js');
+    document.body.appendChild(s);
   }
 
   /* ===================== 5) HLAVIČKA ===================== */
@@ -241,6 +257,7 @@
   }
   function init() {
     run(header, 'hlavička');
+    run(guidePage, 'průvodce – stránka');
     if (!document.body.classList.contains('type-index')) return;
     run(ageStrip, 'věk');
     run(productCards, 'karty');
