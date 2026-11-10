@@ -229,7 +229,7 @@
 /* tlačítko */
 .type-index .products-block .product-btn{display:block!important;position:static!important;margin:auto 0 0!important;padding:14px 16px 16px!important;width:100%;box-sizing:border-box;opacity:1!important;visibility:visible!important;transform:none!important}
 .type-index .products-block .product-btn form{margin:0!important;width:100%!important;max-width:none!important}
-.type-index .products-block .product-btn .btn{display:flex!important;align-items:center;justify-content:center;width:100%!important;min-height:46px;height:auto!important;margin:0!important;padding:0 18px!important;border-radius:999px!important;border:1px solid #a8553a!important;background:#a8553a!important;color:#fff!important;font-size:15px!important;font-weight:700!important;line-height:1.2!important;text-transform:none!important;letter-spacing:0!important;box-shadow:0 3px 0 #8a4129!important;transition:background .15s}
+.type-index .products-block .product-btn .btn{display:flex!important;align-items:center;justify-content:center;width:100%!important;max-width:none!important;min-height:46px;height:auto!important;margin:0!important;padding:0 18px!important;border-radius:999px!important;border:1px solid #a8553a!important;background:#a8553a!important;color:#fff!important;font-size:15px!important;font-weight:700!important;line-height:1.2!important;text-transform:none!important;letter-spacing:0!important;box-shadow:0 3px 0 #8a4129!important;transition:background .15s}
 .type-index .products-block .product-btn .btn:hover{background:#96492f!important}
 .type-index .products-block .product-btn .btn::before,.type-index .products-block .product-btn .btn::after{display:none!important}
 .type-index .products-block .product-btn .btn span{color:inherit!important}
@@ -242,7 +242,7 @@
   .type-index .products-block{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .type-index .products-block .p{border-radius:14px}
   .type-index .products-block .flags-default{top:8px!important;left:8px!important;gap:4px}
-  .type-index .products-block .flags-default .flag{font-size:9.5px!important;padding:4px 7px!important;white-space:normal;max-width:calc(100% - 8px)}
+  .type-index .products-block .flags-default .flag{font-size:9.5px!important;padding:4px 7px!important;white-space:nowrap;max-width:none!important}
   .type-index .products-block .flags-extra{top:8px!important;right:8px!important}
   .type-index .products-block .flags-extra .flag{width:42px;height:42px;font-size:12px!important}
   .type-index .products-block .p-in{padding:12px 10px 0!important}
