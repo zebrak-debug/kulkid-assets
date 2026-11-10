@@ -350,7 +350,8 @@ a.kk-foot__pill:hover{text-decoration:none!important;background:#f7eef1}
 #footer .kk-foot__bottom{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding:20px 0 24px;font-size:13px}
 #footer .kk-foot__cookies{margin-left:10px;opacity:.75}
 #footer .kk-foot__sig #signature,#footer .kk-foot__sig #signature a{color:#f5ede8!important;font-size:13px}
-#footer .kk-foot__sig #signature{display:inline-flex!important;align-items:center;gap:4px}
+#footer .kk-foot__sig #signature{display:inline-flex!important;align-items:center;gap:4px;white-space:nowrap}
+#footer .kk-foot__sig #signature a{display:inline-flex;align-items:center;gap:4px}
 #footer .kk-foot__sig #signature img{max-height:17px;width:auto;vertical-align:middle}
 
 @media(max-width:991px){
@@ -375,6 +376,7 @@ a.kk-foot__pill:hover{text-decoration:none!important;background:#f7eef1}
   #footer .kk-foot__h.kk-foot__h--cta{margin-top:20px!important}
   #footer .kk-foot__badges{display:block;margin-top:0;padding:20px 0;border-top:0}
   #footer .kk-foot__bgroup+.kk-foot__bgroup{margin-top:16px}
-  #footer .kk-d{display:none}.kk-m{display:inline}
+  #footer .kk-d{display:none}#footer .kk-m{display:inline}
+  #footer .kk-foot__hours-m{margin-left:-6px}
   #footer .kk-foot__bottom{justify-content:center;text-align:center}
 }
