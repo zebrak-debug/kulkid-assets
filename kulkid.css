@@ -210,8 +210,8 @@
 .type-index .products-block .p-bottom>[data-micro="offer"]{display:flex!important;flex-direction:column;align-items:flex-start;gap:0}
 /* dostupnost */
 .type-index .products-block .p-tools{order:-1;margin:0 0 10px!important;padding:0!important;width:100%;text-align:left!important;display:block!important}
-.type-index .products-block .availability{display:flex!important;align-items:baseline;gap:7px;margin:0!important;padding:0!important;font-size:14px!important;line-height:1.35!important;font-weight:700!important;text-align:left!important}
-.type-index .products-block .availability>span:first-child{color:#3d6b3a!important}
+.type-index .products-block .availability{display:flex!important;align-items:baseline;gap:7px;margin:0!important;padding:0!important;font-size:14px!important;line-height:1.35!important;font-weight:700!important;text-align:left!important;text-transform:none!important;letter-spacing:0!important}
+.type-index .products-block .availability>span:first-child{color:#3d6b3a!important;text-transform:none!important;letter-spacing:0!important;font-size:inherit!important;font-weight:inherit!important}
 .type-index .products-block .availability::before{content:"";flex:0 0 7px;width:7px;height:7px;border-radius:50%;background:#3d6b3a;transform:translateY(-1px)}
 .type-index .products-block .availability.kk-av--wait>span:first-child{color:#a8601f!important}
 .type-index .products-block .availability.kk-av--wait::before{background:#a8601f}
@@ -228,7 +228,7 @@
 .type-index .products-block .kk-ship{margin:6px 0 0;font-size:13px;line-height:1.35;color:#8a6f63}
 /* tlačítko */
 .type-index .products-block .product-btn{display:block!important;position:static!important;margin:auto 0 0!important;padding:14px 16px 16px!important;width:100%;box-sizing:border-box;opacity:1!important;visibility:visible!important;transform:none!important}
-.type-index .products-block .product-btn form{margin:0!important}
+.type-index .products-block .product-btn form{margin:0!important;width:100%!important;max-width:none!important}
 .type-index .products-block .product-btn .btn{display:flex!important;align-items:center;justify-content:center;width:100%!important;min-height:46px;height:auto!important;margin:0!important;padding:0 18px!important;border-radius:999px!important;border:1px solid #a8553a!important;background:#a8553a!important;color:#fff!important;font-size:15px!important;font-weight:700!important;line-height:1.2!important;text-transform:none!important;letter-spacing:0!important;box-shadow:0 3px 0 #8a4129!important;transition:background .15s}
 .type-index .products-block .product-btn .btn:hover{background:#96492f!important}
 .type-index .products-block .product-btn .btn::before,.type-index .products-block .product-btn .btn::after{display:none!important}
