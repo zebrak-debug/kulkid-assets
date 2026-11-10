@@ -143,8 +143,9 @@
     }
     intro();
 
+    // mezi první a druhý výpis produktů
     var blocks = document.querySelectorAll('.products-block');
-    if (blocks.length) blocks[blocks.length - 1].insertAdjacentElement('afterend', sec);
+    if (blocks.length) blocks[0].insertAdjacentElement('afterend', sec);
     else {
       sec.classList.add('container');
       (document.getElementById('content') || document.querySelector('.content-wrapper') || document.body).appendChild(sec);
@@ -176,12 +177,16 @@
       // telefon
       btns.insertAdjacentHTML('afterbegin', '<a class="kk-hcontact" href="tel:' + HEADER_PHONE.replace(/\s/g, '') + '">' + svg.phone +
         '<span><b>' + HEADER_PHONE + '</b><small>' + HEADER_HOURS + '</small></span></a>');
-      // přihlášení
-      var login = btns.querySelector('.top-nav-button-login');
-      if (login) {
-        var logged = document.body.classList.contains('user-logged-in') || !!document.querySelector('.top-nav-button-account');
+      // přihlášení – Shoptet tlačítko po načtení překresluje, proto hlídáme a doplňujeme znovu
+      var decorateLogin = function () {
+        var login = btns.querySelector('.top-nav-button-login, .top-nav-button-account');
+        if (!login || login.querySelector('.kk-hlogin')) return;
+        var logged = document.body.classList.contains('user-logged-in') || login.classList.contains('top-nav-button-account');
         login.insertAdjacentHTML('beforeend', '<span class="kk-hlogin">' + svg.user + '<span><b>' + (logged ? 'Můj účet' : 'Přihlásit') + '</b><small>Moje objednávky</small></span></span>');
-      }
+      };
+      decorateLogin();
+      if (window.MutationObserver) new MutationObserver(decorateLogin).observe(btns, { childList: true, subtree: true });
+      window.addEventListener('load', decorateLogin);
       // košík
       var cart = btns.querySelector('.click-cart a');
       if (cart && !cart.querySelector('.kk-cart-label')) cart.insertAdjacentHTML('beforeend', '<span class="kk-cart-label">Košík</span>');
