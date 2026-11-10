@@ -18,11 +18,6 @@
     { label: 'První stavebnice',  url: '/na-zacatek/' }
   ];
 
-  // 3) Produkty v záložkách
-  var TABS_TITLE = 'Co u nás rodiče kupují nejčastěji';
-  var TABS_SUBTITLE = 'Ceny včetně DPH';
-  var TABS_RENAME = { 'Nejprodávanější': 'Bestsellery', 'Novinky': 'Novinky', 'Akční zboží': 'Akce', 'Akce': 'Akce', 'Tipy': 'Tipy' };
-
   // 4) Průvodce výběrem
   var GUIDE_IMG = 'https://cdn.myshoptet.com/usr/appgrade.myshoptet.com/user/banners/1320x632-2-2.jpg';
   function guideResultUrl(a) {
@@ -59,84 +54,6 @@
     });
     html += '</div></div>';
     anchor.insertAdjacentHTML('afterend', html);
-  }
-
-  /* ===================== 3) PRODUKTY V ZÁLOŽKÁCH ===================== */
-  function productTabs() {
-    if (document.querySelector('.kk-tabs')) return;
-
-    var groups = [];
-    [].forEach.call(document.querySelectorAll('.homepage-group-title'), function (t) {
-      var b = t.nextElementSibling;
-      while (b && !b.classList.contains('products-block')) b = b.nextElementSibling;
-      if (b) groups.push({ title: t, block: b, name: t.textContent.trim() });
-    });
-    if (groups.length < 2) return;
-
-    var host = groups[0].title.parentElement;
-    var hostTitle = groups[0].title;
-
-    groups.sort(function (a, b) {
-      var x = a.name.indexOf('Nejprodáv') === 0 ? 0 : 1;
-      var y = b.name.indexOf('Nejprodáv') === 0 ? 0 : 1;
-      return x - y;
-    });
-
-    var head = document.createElement('div');
-    head.className = 'kk-tabs-head';
-    head.innerHTML = '<div><h2>' + TABS_TITLE + '</h2><p>' + TABS_SUBTITLE + '</p></div><div class="kk-tabs" role="tablist"></div>';
-    host.insertBefore(head, hostTitle);
-    var nav = head.querySelector('.kk-tabs');
-
-    var more = document.createElement('div');
-    more.className = 'kk-more';
-    more.innerHTML = '<button type="button">Zobrazit všechny</button>';
-
-    var oldWrappers = [];
-    groups.forEach(function (g, i) {
-      var w = g.title.closest('.products-group');
-      if (w && oldWrappers.indexOf(w) < 0) oldWrappers.push(w);
-      g.title.classList.add('kk-moved');
-      host.appendChild(g.block);
-      g.block.classList.add('kk-limited');
-      if (i > 0) g.block.classList.add('kk-tab-hide');
-
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.setAttribute('role', 'tab');
-      btn.textContent = TABS_RENAME[g.name] || g.name;
-      if (i === 0) btn.classList.add('is-active');
-      btn.addEventListener('click', function () {
-        groups.forEach(function (o, j) {
-          o.block.classList.toggle('kk-tab-hide', j !== i);
-          nav.children[j].classList.toggle('is-active', j === i);
-        });
-        updateMore();
-        window.dispatchEvent(new Event('resize'));
-      });
-      nav.appendChild(btn);
-    });
-    host.appendChild(more);
-
-    function active() {
-      return groups.filter(function (g) { return !g.block.classList.contains('kk-tab-hide'); })[0];
-    }
-    function updateMore() {
-      var a = active();
-      var limit = window.innerWidth < 768 ? 6 : 8;
-      var n = a.block.querySelectorAll('.product').length;
-      more.style.display = (a.block.classList.contains('kk-limited') && n > limit) ? '' : 'none';
-    }
-    more.querySelector('button').addEventListener('click', function () {
-      active().block.classList.remove('kk-limited');
-      updateMore();
-      window.dispatchEvent(new Event('resize'));
-    });
-    updateMore();
-
-    oldWrappers.forEach(function (w) {
-      if (!w.querySelector('.products-block')) w.style.display = 'none';
-    });
   }
 
   /* ===================== 4) PRŮVODCE VÝBĚREM ===================== */
@@ -193,12 +110,8 @@
     }
     intro();
 
-    var more = document.querySelector('.kk-more');
-    var tabs = document.querySelector('.kk-tabs-head');
     var blocks = document.querySelectorAll('.products-block');
-    if (more) more.insertAdjacentElement('afterend', sec);
-    else if (tabs) tabs.parentElement.appendChild(sec);
-    else if (blocks.length) blocks[blocks.length - 1].insertAdjacentElement('afterend', sec);
+    if (blocks.length) blocks[blocks.length - 1].insertAdjacentElement('afterend', sec);
     else {
       sec.classList.add('container');
       (document.getElementById('content') || document.querySelector('.content-wrapper') || document.body).appendChild(sec);
@@ -292,7 +205,6 @@
     run(header, 'hlavička');
     if (!document.body.classList.contains('type-index')) return;
     run(ageStrip, 'věk');
-    run(productTabs, 'záložky');
     run(guide, 'průvodce');
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

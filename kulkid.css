@@ -15,22 +15,6 @@
 .kk-age__sep{flex:0 0 1px;align-self:stretch;background:#e6d8dd;margin:4px 6px}
 .kk-age a.kk-age__gift{padding:10px 18px;background:#fbf6f4}
 
-/* ===== 3) Produkty v zĂĄloĹžkĂĄch ===== */
-.kk-tabs-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin:8px 0 22px}
-.kk-tabs-head h2{margin:0 0 4px;font-size:30px;line-height:1.2;font-weight:800;color:#4a3b33}
-.kk-tabs-head p{margin:0;font-size:14px;color:#8a6f63}
-.kk-tabs{display:inline-flex;gap:4px;padding:5px;background:#f3e6ea;border-radius:999px;overflow-x:auto;scrollbar-width:none;max-width:100%}
-.kk-tabs::-webkit-scrollbar{display:none}
-.kk-tabs button{flex:0 0 auto;border:0;background:transparent;padding:10px 20px;border-radius:999px;font-size:14px;font-weight:700;color:#6b5a4f;cursor:pointer;white-space:nowrap;transition:background .15s,box-shadow .15s}
-.kk-tabs button:hover{color:#4a3b33}
-.kk-tabs button.is-active{background:#fff;color:#4a3b33;box-shadow:0 2px 8px rgba(74,59,51,.12)}
-.kk-tab-hide{display:none!important}
-.type-index .homepage-group-title.kk-moved{display:none!important}
-.kk-limited .product:nth-child(n+9){display:none!important}
-.kk-more{text-align:center;margin:24px 0 8px}
-.kk-more button{border:1px solid #8b6f63;background:#fff;color:#4a3b33;font-weight:700;font-size:15px;padding:13px 28px;border-radius:999px;cursor:pointer;transition:background .15s}
-.kk-more button:hover{background:#f7eef1}
-
 /* ===== 4) PrĹŻvodce vĂ˝bÄrem ===== */
 .kk-guide{margin:32px auto 40px;clear:both;width:100%}
 .kk-guide__box{display:grid;grid-template-columns:1.25fr 1fr;background:#f0dde3;border-radius:22px;overflow:hidden;min-height:400px}
@@ -72,11 +56,6 @@
   .kk-age a{font-size:14px}
 
 
-  .kk-tabs-head{flex-direction:column;align-items:stretch;gap:14px;margin-bottom:16px}
-  .kk-tabs-head h2{font-size:22px}
-  .kk-tabs{display:flex;width:100%}
-  .kk-tabs button{flex:1 0 auto;padding:9px 14px;font-size:13px}
-  .kk-limited .product:nth-child(n+7){display:none!important}
 
   .kk-guide{margin:20px auto 28px}
   .kk-guide__box{border-radius:18px}
