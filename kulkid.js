@@ -18,6 +18,11 @@
     { label: 'První stavebnice',  url: '/na-zacatek/' }
   ];
 
+  // 6) Karta produktu
+  var SHIP_FREE_FROM = 3000;              // od této ceny „Doprava zdarma“
+  var SHIP_FROM_TEXT = 'Doprava od 79 Kč';
+  var AV_RENAME = { 'Máme skladem ihned k odeslání': 'Skladem — ihned k odeslání' };
+
   // 4) Průvodce výběrem
   var GUIDE_IMG = 'https://cdn.myshoptet.com/usr/appgrade.myshoptet.com/user/banners/1320x632-2-2.jpg';
   function guideResultUrl(a) {
@@ -54,6 +59,34 @@
     });
     html += '</div></div>';
     anchor.insertAdjacentHTML('afterend', html);
+  }
+
+  /* ===================== 6) KARTA PRODUKTU ===================== */
+  function productCards() {
+    [].forEach.call(document.querySelectorAll('.products-block .product'), function (p) {
+      if (p.classList.contains('kk-card')) return;
+      p.classList.add('kk-card');
+
+      var av = p.querySelector('.availability');
+      if (av) {
+        var s = av.querySelector('span');
+        var t = s ? s.textContent.trim() : '';
+        if (s && AV_RENAME[t]) s.textContent = AV_RENAME[t];
+        var low = t.toLowerCase();
+        if (/nedostupn|vyprodan/.test(low)) av.classList.add('kk-av--out');
+        else if (!/^(máme )?skladem( ihned)?/.test(low)) av.classList.add('kk-av--wait');
+      }
+
+      var offer = p.querySelector('[data-micro="offer"]');
+      var prices = p.querySelector('.prices');
+      if (offer && prices && !p.querySelector('.kk-ship')) {
+        var price = parseFloat(offer.getAttribute('data-micro-price')) || 0;
+        var ship = document.createElement('div');
+        ship.className = 'kk-ship';
+        ship.textContent = price >= SHIP_FREE_FROM ? 'Doprava zdarma' : SHIP_FROM_TEXT;
+        prices.insertAdjacentElement('afterend', ship);
+      }
+    });
   }
 
   /* ===================== 4) PRŮVODCE VÝBĚREM ===================== */
@@ -205,6 +238,7 @@
     run(header, 'hlavička');
     if (!document.body.classList.contains('type-index')) return;
     run(ageStrip, 'věk');
+    run(productCards, 'karty');
     run(guide, 'průvodce');
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

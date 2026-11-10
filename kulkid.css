@@ -176,3 +176,82 @@
   .benefitBanner.position--benefitHomepage .benefitBanner__item{padding:16px!important;gap:12px}
   .benefitBanner.position--benefitHomepage .benefitBanner__title{font-size:15px!important}
 }
+
+/* ===== 6) Karta produktu na homepage (podle návrhu) ===== */
+.type-index .products-block{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin:0 0 24px!important;padding:0!important;flex-wrap:initial!important}
+.type-index .products-block::before,.type-index .products-block::after{display:none!important}
+.type-index .products-block .product{width:auto!important;max-width:none!important;flex:none!important;margin:0!important;padding:0!important;border:0!important;float:none!important;display:block}
+.type-index .products-block .p{position:relative;display:flex!important;flex-direction:column;height:100%;margin:0!important;padding:0!important;background:#fff;border:1px solid #f0e4e8!important;border-radius:18px;overflow:hidden;box-shadow:0 2px 10px rgba(74,59,51,.05);transition:box-shadow .2s,transform .2s;text-align:left}
+.type-index .products-block .p:hover{box-shadow:0 8px 24px rgba(74,59,51,.10);transform:translateY(-2px)}
+/* obrázek */
+.type-index .products-block .p .image{position:relative;display:block!important;max-height:none!important;height:auto!important;aspect-ratio:4/3;margin:0!important;padding:0!important;background:#fff;overflow:hidden}
+.type-index .products-block .p .image img{position:absolute;inset:0;width:100%!important;height:100%!important;max-width:none!important;object-fit:contain;margin:0!important;transition:transform .3s}
+.type-index .products-block .p:hover .image img{transform:scale(1.03)}
+/* štítky */
+.type-index .products-block .flags-default{position:absolute!important;top:12px!important;left:12px!important;right:auto!important;display:flex!important;flex-direction:column;align-items:flex-start;gap:6px;z-index:2;margin:0!important}
+.type-index .products-block .flags-default .flag{display:inline-block!important;margin:0!important;padding:5px 10px!important;border-radius:8px!important;background:#2f6b6e;color:#fff!important;font-size:11px!important;line-height:1.2!important;font-weight:800!important;letter-spacing:.04em;text-transform:uppercase;box-shadow:none!important;white-space:nowrap}
+.type-index .products-block .flags-default .flag:nth-child(2){background:#a8601f}
+.type-index .products-block .flags-default .flag:nth-child(3){background:#5b4a8a}
+.type-index .products-block .flags-default .flag-new{background:#3d6b3a!important}
+.type-index .products-block .flags-default .flag-tip{background:#a8456a!important}
+.type-index .products-block .flags-default .flag-action{background:#a8553a!important}
+/* sleva – kulatý odznak vpravo */
+.type-index .products-block .flags-extra{position:absolute!important;top:12px!important;right:12px!important;left:auto!important;bottom:auto!important;z-index:2;margin:0!important;display:block!important}
+.type-index .products-block .flags-extra .flag{display:flex!important;align-items:center;justify-content:center;width:52px;height:52px;margin:0!important;padding:0!important;border-radius:50%!important;background:#a8553a!important;color:#fff!important;font-size:14px!important;font-weight:800!important;line-height:1!important;box-shadow:0 3px 8px rgba(74,59,51,.18)!important}
+.type-index .products-block .flags-extra .flag *{color:#fff!important}
+/* obsah */
+.type-index .products-block .p-in{display:flex!important;flex-direction:column;flex:1 1 auto;padding:16px 16px 0!important;margin:0!important;text-align:left}
+.type-index .products-block .p-in-in{padding:0!important;margin:0!important;height:auto!important;min-height:0!important}
+.type-index .products-block .p .name{display:block;margin:0 0 8px!important;padding:0!important;height:auto!important;min-height:0!important;color:#4a3b33!important;font-size:17px!important;line-height:1.3!important;font-weight:800!important;text-decoration:none!important;text-align:left!important}
+.type-index .products-block .p .name span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.type-index .products-block .p .name:hover{color:#a8553a!important}
+.type-index .products-block .ratings-wrapper{display:none!important}
+.type-index .products-block .p-bottom{margin:0!important;padding:0!important;border:0!important;text-align:left!important}
+.type-index .products-block .p-bottom>[data-micro="offer"]{display:flex!important;flex-direction:column;align-items:flex-start;gap:0}
+/* dostupnost */
+.type-index .products-block .p-tools{order:-1;margin:0 0 10px!important;padding:0!important;width:100%;text-align:left!important;display:block!important}
+.type-index .products-block .availability{display:flex!important;align-items:baseline;gap:7px;margin:0!important;padding:0!important;font-size:14px!important;line-height:1.35!important;font-weight:700!important;text-align:left!important}
+.type-index .products-block .availability>span:first-child{color:#3d6b3a!important}
+.type-index .products-block .availability::before{content:"";flex:0 0 7px;width:7px;height:7px;border-radius:50%;background:#3d6b3a;transform:translateY(-1px)}
+.type-index .products-block .availability.kk-av--wait>span:first-child{color:#a8601f!important}
+.type-index .products-block .availability.kk-av--wait::before{background:#a8601f}
+.type-index .products-block .availability.kk-av--out>span:first-child{color:#8a6f63!important}
+.type-index .products-block .availability.kk-av--out::before{background:#c9b8b0}
+.type-index .products-block .availability-amount{display:none!important}
+/* cena */
+.type-index .products-block .prices{margin:0!important;padding:0!important;text-align:left!important;width:100%}
+.type-index .products-block .price-final{display:flex!important;flex-direction:row-reverse;justify-content:flex-end;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:0!important;color:#4a3b33!important;text-align:left!important}
+.type-index .products-block .price-final strong{font-size:24px!important;line-height:1.2!important;font-weight:800!important;color:#4a3b33!important}
+.type-index .products-block .price-standard{font-size:13px!important;color:#8a6f63!important;text-decoration:line-through;margin:0!important}
+.type-index .products-block .price-standard span{text-decoration:line-through}
+.type-index .products-block .price-save,.type-index .products-block .price-additional{display:none!important}
+.type-index .products-block .kk-ship{margin:6px 0 0;font-size:13px;line-height:1.35;color:#8a6f63}
+/* tlačítko */
+.type-index .products-block .product-btn{display:block!important;position:static!important;margin:auto 0 0!important;padding:14px 16px 16px!important;width:100%;box-sizing:border-box;opacity:1!important;visibility:visible!important;transform:none!important}
+.type-index .products-block .product-btn form{margin:0!important}
+.type-index .products-block .product-btn .btn{display:flex!important;align-items:center;justify-content:center;width:100%!important;min-height:46px;height:auto!important;margin:0!important;padding:0 18px!important;border-radius:999px!important;border:1px solid #a8553a!important;background:#a8553a!important;color:#fff!important;font-size:15px!important;font-weight:700!important;line-height:1.2!important;text-transform:none!important;letter-spacing:0!important;box-shadow:0 3px 0 #8a4129!important;transition:background .15s}
+.type-index .products-block .product-btn .btn:hover{background:#96492f!important}
+.type-index .products-block .product-btn .btn::before,.type-index .products-block .product-btn .btn::after{display:none!important}
+.type-index .products-block .product-btn .btn span{color:inherit!important}
+.type-index .products-block .product-btn .btn:not(.add-to-cart-button){background:#fff!important;color:#4a3b33!important;border-color:#4a3b33!important;box-shadow:none!important}
+.type-index .products-block .product-btn .btn:not(.add-to-cart-button):hover{background:#fbf6f4!important}
+@media(max-width:991px){
+  .type-index .products-block{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+}
+@media(max-width:767px){
+  .type-index .products-block{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .type-index .products-block .p{border-radius:14px}
+  .type-index .products-block .flags-default{top:8px!important;left:8px!important;gap:4px}
+  .type-index .products-block .flags-default .flag{font-size:9.5px!important;padding:4px 7px!important;white-space:normal;max-width:calc(100% - 8px)}
+  .type-index .products-block .flags-extra{top:8px!important;right:8px!important}
+  .type-index .products-block .flags-extra .flag{width:42px;height:42px;font-size:12px!important}
+  .type-index .products-block .p-in{padding:12px 10px 0!important}
+  .type-index .products-block .p .name{font-size:14px!important;margin-bottom:6px!important}
+  .type-index .products-block .p .name span{-webkit-line-clamp:3}
+  .type-index .products-block .availability{font-size:12.5px!important;gap:6px}
+  .type-index .products-block .price-final strong{font-size:18px!important}
+  .type-index .products-block .price-standard{font-size:12px!important}
+  .type-index .products-block .kk-ship{display:none}
+  .type-index .products-block .product-btn{padding:10px 10px 12px!important}
+  .type-index .products-block .product-btn .btn{min-height:40px;font-size:14px!important;padding:0 10px!important}
+}
