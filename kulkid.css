@@ -211,7 +211,7 @@
 .type-index .products-block .p-bottom>[data-micro="offer"]{display:flex!important;flex-direction:column;align-items:flex-start;gap:0}
 /* dostupnost */
 .type-index .products-block .p-tools{order:-1;margin:0 0 10px!important;padding:0!important;width:100%;text-align:left!important;display:block!important}
-.type-index .products-block .availability{display:flex!important;align-items:baseline;gap:7px;margin:0!important;padding:0!important;font-size:14px!important;line-height:1.35!important;font-weight:700!important;text-align:left!important;text-transform:none!important;letter-spacing:0!important}
+.type-index .products-block .availability{display:flex!important;justify-content:flex-start!important;align-items:baseline;gap:7px;margin:0!important;padding:0!important;font-size:14px!important;line-height:1.35!important;font-weight:700!important;text-align:left!important;text-transform:none!important;letter-spacing:0!important}
 .type-index .products-block .availability>span:first-child{color:#3d6b3a!important;text-transform:none!important;letter-spacing:0!important;font-size:inherit!important;font-weight:inherit!important}
 .type-index .products-block .availability::before{content:"";flex:0 0 7px;width:7px;height:7px;border-radius:50%;background:#3d6b3a;transform:translateY(-1px)}
 .type-index .products-block .availability.kk-av--wait>span:first-child{color:#a8601f!important}
