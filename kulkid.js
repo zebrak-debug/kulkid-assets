@@ -24,7 +24,7 @@
   var AV_RENAME = { 'Máme skladem ihned k odeslání': 'Skladem — ihned k odeslání' };
 
   // 4) Průvodce výběrem
-  var GUIDE_IMG = 'https://cdn.myshoptet.com/usr/appgrade.myshoptet.com/user/banners/1320x632-2-2.jpg';
+  var GUIDE_IMG = '/user/documents/upload/pr%C5%AFvodce.png'; // průvodce.png ve správci souborů
   function guideResultUrl(a) {
     // a.pro, a.vek, a.cil, a.cena – zde později doplnit logiku doporučení
     return '/connetix/';
