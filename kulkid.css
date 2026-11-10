@@ -316,3 +316,64 @@
   .kkg-price{font-size:16px}
   .kkg-foot .kkg-btn{width:100%}
 }
+
+/* ===================== 7) PATIČKA (podle návrhu) ===================== */
+#footer.kk-footer{background:#6e5b4c!important;color:#f5ede8;padding:0;margin-top:40px;border:0}
+#footer.kk-footer>.footer-rows,#footer.kk-footer>.footer-bottom{display:none!important}
+.kk-foot{padding:56px 0 0;font-size:15px;line-height:1.5}
+.kk-foot svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.kk-foot svg .kk-fill,.kk-foot svg.kk-fill{fill:currentColor;stroke:none}
+.kk-foot a{color:#f5ede8!important;text-decoration:none!important;transition:color .15s,opacity .15s}
+.kk-foot a:hover{color:#fff!important;text-decoration:underline!important;text-underline-offset:3px}
+.kk-foot__cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px}
+.kk-foot__h{margin:0 0 18px;padding:0;font-size:14px;line-height:1.3;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#fff}
+.kk-foot__h button{all:unset;display:flex;align-items:center;justify-content:space-between;width:100%;cursor:default}
+.kk-foot__h button svg{display:none}
+.kk-foot__h--cta{margin:26px 0 14px}
+.kk-foot ul{list-style:none;margin:0;padding:0}
+.kk-foot__body li{margin:0 0 12px;padding:0}
+.kk-foot__body li:before{display:none}
+.kk-foot__contact li{display:flex;align-items:center;gap:10px}
+.kk-foot__contact li.kk-foot__hours{font-size:13px;opacity:.9}
+.kk-foot__hours-m,.kk-m{display:none}
+.kk-foot__socs{display:flex;gap:10px}
+.kk-foot__soc{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.18)}
+.kk-foot__soc:hover{background:rgba(255,255,255,.3);text-decoration:none!important}
+.kk-foot__btn{display:inline-flex;align-items:center;min-height:42px;padding:0 22px;border-radius:999px;background:#fff;color:#4a3b33!important;font-weight:700;font-size:14px}
+.kk-foot__btn:hover{background:#f7eef1;color:#4a3b33!important;text-decoration:none!important}
+.kk-foot__badges{display:flex;flex-wrap:wrap;gap:20px 40px;margin-top:36px;padding:28px 0;border-top:1px solid rgba(255,255,255,.2);border-bottom:1px solid rgba(255,255,255,.2)}
+.kk-foot__badges .kk-foot__h{font-size:12px;margin-bottom:12px}
+.kk-foot__pills{display:flex;flex-wrap:wrap;gap:8px}
+.kk-foot__pill{display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:7px;background:#fff;color:#6e5b4c!important;font-size:13px;font-weight:700;white-space:nowrap}
+a.kk-foot__pill:hover{text-decoration:none!important;background:#f7eef1}
+.kk-foot__bottom{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding:20px 0 24px;font-size:13px}
+.kk-foot__cookies{margin-left:10px;opacity:.75}
+.kk-foot__sig #signature,.kk-foot__sig #signature a{color:#f5ede8!important;font-size:13px}
+.kk-foot__sig #signature{display:inline-flex!important;align-items:center;gap:4px}
+.kk-foot__sig #signature img{max-height:17px;width:auto;vertical-align:middle}
+
+@media(max-width:991px){
+  .kk-foot__cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:767px){
+  #footer.kk-footer{margin-top:24px}
+  .kk-foot{padding-top:28px}
+  .kk-foot__cols{display:block}
+  .kk-foot__col--contact{padding-bottom:12px}
+  .kk-foot__col--contact .kk-foot__h,.kk-foot__hours{display:none!important}
+  .kk-foot__hours-m{display:inline;opacity:.9}
+  .kk-foot__contact li{margin-bottom:10px}
+  .kk-foot__acc{border-top:1px solid rgba(255,255,255,.2)}
+  .kk-foot__acc .kk-foot__h{margin:0}
+  .kk-foot__acc .kk-foot__h button{cursor:pointer;padding:16px 0}
+  .kk-foot__acc .kk-foot__h button svg{display:block;transition:transform .2s}
+  .kk-foot__acc.is-open .kk-foot__h button svg{transform:rotate(180deg)}
+  .kk-foot__acc .kk-foot__body{display:none;padding:0 0 16px}
+  .kk-foot__acc.is-open .kk-foot__body{display:block}
+  .kk-foot__col--follow{border-bottom:1px solid rgba(255,255,255,.2)}
+  .kk-foot__h--cta{margin-top:20px}
+  .kk-foot__badges{display:block;margin-top:0;padding:20px 0;border-top:0}
+  .kk-foot__bgroup+.kk-foot__bgroup{margin-top:16px}
+  .kk-d{display:none}.kk-m{display:inline}
+  .kk-foot__bottom{justify-content:center;text-align:center}
+}

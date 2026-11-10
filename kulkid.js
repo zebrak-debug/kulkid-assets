@@ -49,6 +49,23 @@
   var HEADER_SEARCH = 'Hledejte stavebnici, značku nebo věk dítěte…';
   var HEADER_HOT = ['Akce']; // položky menu zvýrazněné terakotovou „pilulkou“
 
+  // 7) Patička
+  var FOOTER_INFO_TITLE = 'Informace pro vás'; // odkazy se berou z Shoptetu (Vzhled a obsah → Patička → Informace pro vás)
+  var FOOTER_INFO_SKIP = ['Blog', 'Kontakty'];  // tyhle jsou ve sloupci Spolupráce
+  var FOOTER_INFO_EXTRA = [{ label: 'Moje objednávky', url: '/klient/objednavky/' }];
+  var FOOTER_COOP = [
+    { label: 'Velkoobchodní spolupráce', url: '/velkoobchod/' },
+    { label: 'Blog', url: '/blog/' },
+    { label: 'Kontakt', url: '/kontakty/' }
+  ];
+  var FOOTER_CTA = { title: 'Máte dotaz k výběru?', label: 'Napsat nám', url: '/kontakty/' };
+  var FOOTER_BADGES = [
+    { title: 'Přijímáme online platby', items: ['GoPay', 'VISA', 'Mastercard'] },
+    { title: 'Způsoby dopravy', mobileTitle: 'Doprava', items: ['Zásilkovna', 'PPL'] },
+    { title: 'Ověřeno zákazníky', items: [{ label: 'Heureka 5,0 ★', url: '' }] }
+  ];
+  var FOOTER_COPY = '© ' + new Date().getFullYear() + ' KulKid. Všechna práva vyhrazena.';
+
   /* ===================== 1) VYBERTE PODLE VĚKU ===================== */
   function ageStrip() {
     var c = document.getElementById('carousel');
@@ -251,12 +268,107 @@
     }
   }
 
+  /* ===================== 7) PATIČKA ===================== */
+  function footer() {
+    var f = document.getElementById('footer');
+    if (!f || f.querySelector('.kk-foot')) return;
+    var ic = {
+      mail: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>',
+      phone: '<svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
+      facebook: '<svg viewBox="0 0 24 24" class="kk-fill"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21z"/></svg>',
+      instagram: '<svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" class="kk-fill"/></svg>',
+      chev: '<svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>'
+    };
+    function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function list(items) {
+      return '<ul>' + items.map(function (l) { return '<li><a href="' + esc(l.url) + '">' + esc(l.label) + '</a></li>'; }).join('') + '</ul>';
+    }
+    function col(title, body, acc) {
+      return '<div class="kk-foot__col' + (acc ? ' kk-foot__acc' : '') + '">' +
+        '<h3 class="kk-foot__h">' + (acc ? '<button type="button" aria-expanded="false">' + esc(title) + ic.chev + '</button>' : esc(title)) + '</h3>' +
+        '<div class="kk-foot__body">' + body + '</div></div>';
+    }
+
+    // kontakt a sítě – z kontaktního boxu Shoptetu
+    var mailA = f.querySelector('[data-testid="contactboxEmail"] a, .contact-box .mail a');
+    var mail = mailA ? mailA.textContent.replace(/\s/g, '') : 'hello@kulkid.cz';
+    var social = [];
+    ['facebook', 'instagram'].forEach(function (k) {
+      var a = f.querySelector('.contact-box-icon .' + k + ' a');
+      if (a) social.push('<a class="kk-foot__soc" href="' + esc(a.href) + '" target="_blank" rel="noopener" aria-label="' + k + '">' + ic[k] + '</a>');
+    });
+
+    // Informace pro vás – články z patičky Shoptetu
+    var info = [];
+    [].forEach.call(f.querySelectorAll('.custom-footer__articles a'), function (a) {
+      var t = a.textContent.trim();
+      if (FOOTER_INFO_SKIP.indexOf(t) < 0) info.push({ label: t, url: a.getAttribute('href') });
+    });
+    info = info.concat(FOOTER_INFO_EXTRA);
+
+    var contact = '<ul class="kk-foot__contact">' +
+      '<li>' + ic.mail + '<a href="mailto:' + esc(mail) + '">' + esc(mail) + '</a></li>' +
+      '<li>' + ic.phone + '<a href="tel:' + HEADER_PHONE.replace(/\s/g, '') + '">' + esc(HEADER_PHONE) + '</a><span class="kk-foot__hours-m"> · ' + esc(HEADER_HOURS) + '</span></li>' +
+      '<li class="kk-foot__hours">' + esc(HEADER_HOURS) + '</li></ul>';
+
+    var follow = (social.length ? '<div class="kk-foot__socs">' + social.join('') + '</div>' : '');
+    var cta = '<h3 class="kk-foot__h kk-foot__h--cta">' + esc(FOOTER_CTA.title) + '</h3>' +
+      '<a class="kk-foot__btn" href="' + esc(FOOTER_CTA.url) + '">' + esc(FOOTER_CTA.label) + '</a>';
+
+    var badges = FOOTER_BADGES.map(function (g) {
+      return '<div class="kk-foot__bgroup"><h3 class="kk-foot__h"><span class="kk-d">' + esc(g.title) + '</span><span class="kk-m">' + esc(g.mobileTitle || g.title) + '</span></h3><div class="kk-foot__pills">' +
+        g.items.map(function (it) {
+          var o = typeof it === 'string' ? { label: it } : it;
+          return o.url ? '<a class="kk-foot__pill" href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.label) + '</a>' : '<span class="kk-foot__pill">' + esc(o.label) + '</span>';
+        }).join('') + '</div></div>';
+    }).join('');
+
+    var wrap = document.createElement('div');
+    wrap.className = 'kk-foot';
+    wrap.innerHTML = '<div class="container">' +
+      '<div class="kk-foot__cols">' +
+        col('Kontakt', contact, false).replace('kk-foot__col"', 'kk-foot__col kk-foot__col--contact"') +
+        col(FOOTER_INFO_TITLE, list(info), true) +
+        col('Spolupráce', list(FOOTER_COOP), true) +
+        '<div class="kk-foot__col kk-foot__col--follow"><div class="kk-foot__acc">' +
+          '<h3 class="kk-foot__h"><button type="button" aria-expanded="false">Sledujte nás' + ic.chev + '</button></h3>' +
+          '<div class="kk-foot__body">' + follow + cta + '</div></div></div>' +
+      '</div>' +
+      '<div class="kk-foot__badges">' + badges + '</div>' +
+      '<div class="kk-foot__bottom"><span class="kk-foot__copy">' + esc(FOOTER_COPY) +
+        ' <a href="#" class="kk-foot__cookies">Nastavení cookies</a></span><span class="kk-foot__sig"></span></div>' +
+    '</div>';
+    f.insertBefore(wrap, f.firstChild);
+    f.classList.add('kk-footer');
+
+    // podpis Shoptetu (povinný) přesunout do spodního řádku
+    var sig = document.getElementById('signature');
+    if (sig) wrap.querySelector('.kk-foot__sig').appendChild(sig);
+    // nastavení cookies – původní odkaz Shoptetu
+    wrap.querySelector('.kk-foot__cookies').addEventListener('click', function (e) {
+      e.preventDefault();
+      var c = f.querySelector('.js-cookies-settings');
+      if (c) c.click();
+    });
+
+    // mobil – rozbalovací sekce
+    [].forEach.call(wrap.querySelectorAll('.kk-foot__acc button'), function (b) {
+      b.addEventListener('click', function () {
+        var box = b.closest('.kk-foot__acc');
+        var open = !box.classList.contains('is-open');
+        box.classList.toggle('is-open', open);
+        b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+  }
+
   /* ===================== SPUŠTĚNÍ ===================== */
   function run(fn, name) {
     try { fn(); } catch (e) { console.error('KulKid ' + name + ':', e); }
   }
   function init() {
     run(header, 'hlavička');
+    run(footer, 'patička');
     run(guidePage, 'průvodce – stránka');
     if (!document.body.classList.contains('type-index')) return;
     run(ageStrip, 'věk');
